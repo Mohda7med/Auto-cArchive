@@ -16,7 +16,7 @@ bucket = s3.Bucket(bucket_name)
 for obj in bucket.objects.all():
   if  obj.size > 0:
     key = obj.key
-    if ''annual-enterprise-survey-2018-financial-year-provisional-size-bands-csv' in key:
+    if 'annual-enterprise-survey-2018-financial-year-provisional-size-bands-csv' in key:
       body = obj.get()['Body']
 
       data = pd.read_csv(body)
