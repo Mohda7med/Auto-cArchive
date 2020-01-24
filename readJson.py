@@ -25,7 +25,7 @@ for obj in bucket.objects.all():
 #      print (data.head())
 
        # read file
-       with open('key', 'r') as myfile:
+       with open(key, 'r') as myfile:
           data=myfile.read()
 
        # parse file
