@@ -19,10 +19,11 @@ for obj in bucket.objects.all():
   if  obj.size > 0:
     key = obj.key
     if 'cams_lidars' in key:
-      url = 'https://mohammed-autonomous-vehicles-bucket.s3-us-west-2.amazonaws.com/cams_lidars.json' 
+#      url = 'https://mohammed-autonomous-vehicles-bucket.s3-us-west-2.amazonaws.com/cams_lidars.json' 
+      body = obj.get()['Body']
+      df = pd.read_json(body)
 
-      df = pd.read_json(url, orient='columns')
-#      print (df.head())
+      print (df.head())
 
        # read file
 #       with open(body, 'r') as myfile:
