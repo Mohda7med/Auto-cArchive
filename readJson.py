@@ -18,18 +18,18 @@ bucket = s3.Bucket(bucket_name)
 for obj in bucket.objects.all():
   if  obj.size > 0:
     key = obj.key
-    if 'annual-enterprise-survey-2018-financial-year-provisional-size-bands-csv' in key:
-#      body = obj.get()['Body']
+    if 'cams_lidars' in key:
+       body = obj.get()['Body']
 
 #      data = pd.read_csv(body)
 #      print (data.head())
 
        # read file
-       with open(key, 'r') as myfile:
-          data=myfile.read()
+#       with open(key, 'r') as myfile:
+#          data=myfile.read()
 
        # parse file
-       text = json.loads(data)
+       text = json.loads(body)
 
        print ( str(text['box_0']) )
 
