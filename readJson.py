@@ -19,13 +19,13 @@ for obj in bucket.objects.all():
   if  obj.size > 0:
     key = obj.key
     if 'cams_lidars' in key:
-#       body = obj.get()['Body']
+       body = obj.get()['Body']
 
 #      data = pd.read_csv(body)
 #      print (data.head())
 
        # read file
-       with open(key, 'r') as myfile:
+       with open(body, 'r') as myfile:
           data=myfile.read()
 
        # parse file
