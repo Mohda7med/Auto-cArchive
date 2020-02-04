@@ -1,16 +1,15 @@
-#!/home/ubuntu/anaconda3/bin/python
-
 import pandas as pd
 import numpy as np
-import os 
+import boto3 
 import json
 
 
-def json_to_schema(file):
+def json_to_schema(filename, file):
     audi_file = pd.read_json(file)
     df = audi_file.loc[['center','class','id', 'rot_angle', 'size']]
     schema = pd.DataFrame(index=range(len(df.columns)), columns = ['sample_id', 'object_id', 'center_x', 'center_y', 'center_z', 'width', 'length', 'height', 'angle', 'object_class', 'data_location_in_s3'])
-    schema["sample_id"]= file[-14:-5]
+    schema["sample_id"] = filename[-14:-5]
+    schema["data_location_in_s3"] = filename 
     for lab, row in df.iterrows():
         if lab == "center":
             center_x = []
@@ -42,22 +41,35 @@ def json_to_schema(file):
             schema["width"] = width
             schema["length"] = length
             schema["height"] = height
-    with open(r'/Users/mohammed/Documents/export_dataframe.csv', 'a') as f:
+    with open(r'/home/ubuntu/test-code/audi_to_schema.csv', 'a') as f:
         schema.to_csv(f, header=f.tell()==0, index=False)
 
 
 
 def main():
-    rootdir = r'/Users/mohammed/Downloads/a2d2-preview/camera_lidar_semantic_bboxes'
-    for subdir, dirs, files in os.walk(rootdir):
-        for file in files:
-           if "label3D" in file and file.endswith(".json"):
-                json_file = os.path.join(subdir, file)
-                json_to_schema(json_file)
-                #print(path)
+
+    bucket_name = "mohammed-audi-dataset-bucket"
+    s3 = boto3.resource('s3')
+    bucket = s3.Bucket(bucket_name)
+    numFiles = 0
+
+    for obj in bucket.objects.all():
+    #for obj in bucket.objects.filter(Prefix='20180925_101535/label3D/cam_front_center/'):
+      if  obj.size > 0:
+           key = obj.key
+           if 'label3D/cam_front_center' in key and '.json' in key:
+           #print(key)
+             numFiles = numFiles + 1
+             body = obj.get()['Body']
+             json_to_schema(key, body)
+           #break
+    print(numFiles)
 
 
 if __name__ == '__main__':
   main()
+
+
+
 
 
