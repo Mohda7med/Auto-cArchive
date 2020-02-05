@@ -11,6 +11,7 @@ def json_to_schema(filename, file):
     schema["sample_id"] = filename[-14:-5]
     data_path = filename.replace("label3D/cam_front_center/20180807145028_label3D_frontcenter", "camera/cam_front_center/20180807145028_camera_frontcenter")
     data_path = data_path.replace("json", "png")
+    data_path = "s3://mohammed-audi-dataset-bucket/" + data_path 
     sample_data = data_path
     schema["image_location_in_s3"] = sample_data 
     for lab, row in df.iterrows():
@@ -44,7 +45,7 @@ def json_to_schema(filename, file):
             schema["width"] = width
             schema["length"] = length
             schema["height"] = height
-    with open(r'/home/ubuntu/test-code/export_dataframe.csv', 'a') as f:
+    with open(r'/home/ubuntu/data/audi_to_schema.csv', 'a') as f:
         schema.to_csv(f, header=f.tell()==0, index=False)
 
 
@@ -60,7 +61,7 @@ def main():
     #for obj in bucket.objects.filter(Prefix='20180925_101535/label3D/cam_front_center/'):
       if  obj.size > 0:
            key = obj.key
-           if 'label3D/cam_front_center' in key and '.json' in key:
+           if 'label3D/cam_front_center/' in key and '.json' in key:
            #print(key)
              numFiles = numFiles + 1
              body = obj.get()['Body']
@@ -72,7 +73,7 @@ def main():
 if __name__ == '__main__':
   main()
 
-
+#20180807_145028/label3D/cam_front_center/20180807145028_label3D_frontcenter_000000091.json
 #20180807_145028/label3D/cam_front_center/20180807145028_label3D_frontcenter_000000091.json
 #20180807_145028/camera/cam_front_center/20180807145028_camera_frontcenter_000000091.png
 
