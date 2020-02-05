@@ -7,9 +7,12 @@ import json
 def json_to_schema(filename, file):
     audi_file = pd.read_json(file)
     df = audi_file.loc[['center','class','id', 'rot_angle', 'size']]
-    schema = pd.DataFrame(index=range(len(df.columns)), columns = ['sample_id', 'object_id', 'center_x', 'center_y', 'center_z', 'width', 'length', 'height', 'angle', 'object_class', 'data_location_in_s3'])
+    schema = pd.DataFrame(index=range(len(df.columns)), columns = ['sample_id', 'object_id', 'center_x', 'center_y', 'center_z', 'width', 'length', 'height', 'angle', 'object_class', 'image_location_in_s3'])
     schema["sample_id"] = filename[-14:-5]
-    schema["data_location_in_s3"] = filename 
+    data_path = filename.replace("label3D/cam_front_center/20180807145028_label3D_frontcenter", "camera/cam_front_center/20180807145028_camera_frontcenter")
+    data_path = data_path.replace("json", "png")
+    sample_data = data_path
+    schema["image_location_in_s3"] = sample_data 
     for lab, row in df.iterrows():
         if lab == "center":
             center_x = []
@@ -41,7 +44,7 @@ def json_to_schema(filename, file):
             schema["width"] = width
             schema["length"] = length
             schema["height"] = height
-    with open(r'/home/ubuntu/test-code/audi_to_schema.csv', 'a') as f:
+    with open(r'/home/ubuntu/test-code/export_dataframe.csv', 'a') as f:
         schema.to_csv(f, header=f.tell()==0, index=False)
 
 
@@ -62,7 +65,7 @@ def main():
              numFiles = numFiles + 1
              body = obj.get()['Body']
              json_to_schema(key, body)
-           #break
+             #break
     print(numFiles)
 
 
@@ -70,6 +73,7 @@ if __name__ == '__main__':
   main()
 
 
-
+#20180807_145028/label3D/cam_front_center/20180807145028_label3D_frontcenter_000000091.json
+#20180807_145028/camera/cam_front_center/20180807145028_camera_frontcenter_000000091.png
 
 
