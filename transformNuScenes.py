@@ -70,7 +70,7 @@ def main():
         if columnName == "last_annotation_token":
             images_locations = []
             for i in range(len(columnData)): 
-                # Figure out which camera the object is fully visible in (this may return nothing)
+                # Figure out one camera the object is visible in
                 ann_record = nusc.get("sample_annotation", columnData[i])
                 sample_record = nusc.get("sample", ann_record["sample_token"])        
                 cams = [key for key in sample_record["data"].keys() if "CAM" in key]

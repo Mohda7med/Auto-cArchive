@@ -74,6 +74,7 @@ def main():
         if columnName == "last_annotation_token":
             pathes = []
             for i in range(len(columnData)):
+                # Figure out one camera the object is visible in
                 ann_record = level5data.get("sample_annotation", columnData[i])
                 sample_record = level5data.get("sample", ann_record["sample_token"])        
                 cams = [key for key in sample_record["data"].keys() if "CAM" in key]
