@@ -64,10 +64,11 @@ def main():
            if 'label3D/cam_front_center/' in key and '.json' in key:
            #print(key)
              numFiles = numFiles + 1
+             print(numFiles, "  " + key)
              body = obj.get()['Body']
              json_to_schema(key, body)
              #break
-    print(numFiles)
+    #print(numFiles)
 
 
 if __name__ == '__main__':
