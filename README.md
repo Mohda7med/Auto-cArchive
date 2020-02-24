@@ -11,7 +11,7 @@ Autonomous driving companies chose different data formats for their released dat
 
 This repository combines data from three autonomous driving datasets in different formats into a standard, unified format, in order to support the development of better machine learning pipelines or computer vision algorithms.
 
-![Alt Image Text](aaa.png)
+![multiple datasets to unifiedSchema](images/img1.png)
 
 The main objective is to facilitate a common computer vision task which is object detection. The unified data includes links to locations of images in an Amazon S3 bucket. For each image there is a classification for the object detected in it, along with other information pertaining to the object like size, orientation and distance.
 
@@ -20,6 +20,6 @@ The unified dataset allows the testing of computer vision algorithms against ima
 ## Pipeline
 The pipeline used to create a unified data warehouse for autonomous driving is shown in the figure below. First, the three datasets were ingested into an Amazon S3 bucket. A python script running on an Amazon EC2 instance reads the data from the bucket and transforms it to the unifies format. The output is stored in a Postgres database running on another Ec2 instance. Finally, a web dashboard was designed and integrated to allow the users to run queries against the database. 
 
-![Alt Image Text](bbb.png)
+![Pipeline](images/img2.png)
 
 
