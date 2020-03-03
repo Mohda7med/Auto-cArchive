@@ -15,11 +15,17 @@ This repository combines data from three autonomous driving datasets in differen
 
 The main objective is to facilitate a common computer vision task which is object detection. The unified data includes links to locations of images in an Amazon S3 bucket. For each image there is a classification for the object detected in it, along with other information pertaining to the object like size, orientation and distance.
 
-The unified dataset allows the testing of computer vision algorithms against images from different driving environments like Singapore, Boston, Palo Alto and Germany. For example, it can be used to test if a computer vision algorithm would be able to recognize traffic signs in images from different cities where the design of the signs is different.
+The unified dataset can be used to train and test computer vision algorithms against images from different driving environments like Singapore, Boston, Palo Alto and Germany. For example, it can be used to test if a computer vision algorithm would be able to recognize traffic signs in images from different cities where the design of the signs is different.
 
 ## Pipeline
-The pipeline used to create a unified data warehouse for autonomous driving is shown in the figure below. First, the three datasets were ingested into an Amazon S3 bucket. A python script running on an Amazon EC2 instance reads the data from the bucket and transforms it to the unifies format. The output is stored in a Postgres database running on another Ec2 instance. Finally, a web dashboard was designed and integrated to allow the users to run queries against the database. 
+The pipeline used to create a unified data warehouse for autonomous driving is shown in the figure below. First, the three datasets were ingested into an Amazon S3 bucket. A python script running on an Amazon EC2 instance reads the data from the bucket and transforms it to the unified format. The output is stored in a Postgres database running on another EC2 instance. Finally, a web dashboard was designed and integrated to allow the users to run queries against the database. 
 
 ![Pipeline](images/img2.png)
+
+## Interface
+Users can interact with the database in two different ways. The dashboard at [Auto cArchive](http://44.232.65.147:8050) contains graphs that reveal insights about the data. Moreover, users can go to [pgweb](https://pgweb-demo.herokuapp.com)  web page and log in to have read only access and run queries against the database ( Email me at mohda7med99@gmail.com for login information ) <br />
+
+
+
 
 
