@@ -37,7 +37,7 @@ def main():
         
     # Creating db table from the new csv file:
     try:
-        conn = psycopg2.connect(host="ec2-54-70-11-35.us-west-2.compute.amazonaws.com", database="postgres", user="postgres", password="mohda7med92", port="5432")
+        conn = psycopg2.connect(host="ec2-54-70-11-35.us-west-2.compute.amazonaws.com", database="postgres", user="postgres", password="", port="5432")
     except (Exception) as error:
         print("I am unable to connect to the database" + str(error)) 
         exit()
