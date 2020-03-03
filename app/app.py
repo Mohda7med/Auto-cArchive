@@ -13,10 +13,7 @@ app.config.suppress_callback_exceptions = True
 schema = pd.read_csv('/home/ubuntu/data/indexed_schema.csv')
 cd = schema
 selectable_object_class = cd.object_class.unique()
-# selectable_neighborhoods = cd.neighborhood.unique()
-# selectable_streets = cd.street.unique()
-# cities = ["Los Angeles", "San Francisco", "New York City", "Denver",
-#           "Las Vegas", "Austin"]
+
 
 # Main App
 app.layout = html.Div([
