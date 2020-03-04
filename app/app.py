@@ -19,18 +19,18 @@ selectable_object_class = cd.object_class.unique()
 app.layout = html.Div([
     html.H1("Auto cArchive", style={"textAlign": "center"}),
 
-    html.Div([
-        html.Div([
-            html.Label('Select Object Class'),
-            dcc.Dropdown(
-                id='object-dropdown',
-                options=[{'label': i, 'value': i} for i in selectable_object_class],
-                value=selectable_object_class
-            )
-        ],
-        style={'width': '33%', 'display': 'inline-block'})#,
+#     html.Div([
+#         html.Div([
+#             html.Label('Select Object Class'),
+#             dcc.Dropdown(
+#                 id='object-dropdown',
+#                 options=[{'label': i, 'value': i} for i in selectable_object_class],
+#                 value=selectable_object_class
+#             )
+#         ],
+#         style={'width': '33%', 'display': 'inline-block'})#,
 
-    ]),
+#     ]),
 
     html.Div([
         dcc.Graph(
